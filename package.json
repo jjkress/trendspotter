@@ -1,0 +1,21 @@
+{
+  "name": "trendspotter"
+  , "description": "Watches your styles for changes"
+  , "version": "0.0.3"
+  , "dependencies": {
+      "less": "*"
+    , "valentine": "*"
+    }
+  , "main": "lib/index.js"
+  , "preferGlobal": true
+  , "bin": {
+      "trendspotter": "bin/trendspotter"
+    }
+  , "directories": {
+      "lib": "lib"
+      , "bin": "bin"
+    }
+  , "engines": {
+      "node": ">= 0.6.0"
+  }
+}
