@@ -1,7 +1,7 @@
 {
   "name":         "trendspotter",
-  "description":  "Watches your styles for changes",
-  "version":      "0.0.4",
+  "description":  "Watches your less styles for changes",
+  "version":      "0.9.0",
   "main":         "lib/index.js",
   "preferGlobal": true,
   "dependencies": {

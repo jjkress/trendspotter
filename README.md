@@ -2,19 +2,28 @@
 
 > It watches for changes in your style.
 
-Trendspotter is a file watcher specific to watching less styles. Without any options it will assume only the files in the root directory given will need to be rendered. In order to watch for changes in other files (in subdirectories), it parses the files in the root directory. Thus as it is now, it serves only well in one setup, like this:
+Trendspotter is a file watcher specific to watching less styles. It should be easy to integrate into various development environments that do not support handling less css natively.
+
+You have three ways to invoke `trendspotter`, but you will always do so in the directory of your root less files:
+
+- `trendspotter`: without argument it will look for a configuration named `.spotter.json` and will execute on the root files given in there. If there is no such file, it will exit with an error.
+- `trendspotter rootFile.less`: this will explicitly watch `rootFile.less` and its imports.
+- `trendspotter root1.less root2.less ...`: this will watch multiple root files at once and create separate spotter mappings for each (a spotter mapping maps imports to their root files).
+
+*NOTE*
+
+As of now, the directory layout for your css/less *MUST* be flat. Thus all your imports must be in the same directory as the root files and must not be in a subdirectory. Due to the way the `less` library currently works, it is not able to handle parse errors in imports if those are in a subdirectory. This will be fixed eventually and we will release an update to trendspotter. Until then, you can organize your less files by using a package dot notation:
 
 ```
-styleRootDir/
-	masterStyleOne.less
-	masterStyleTwo.less
-	helpers/
-		helper1.less
-		helper2.less
-		helper3.less
-```
+// Example file organization using dot notation
 
-This will result in `masterStyleOne.css` and `masterStyleTwo.css` in `styleRootDir`. As it maps the imports from the master files, only the affected master files will be updated if one of the helpers are updated. E.g. if `helper3.less` is only imported by `masterStyleOne.less`, only `masterStyleOne.less` will be rerendered.
+bootstrap.mixins.less        // Files from Twitter bootstrap prefixed with bootstrap.
+bootstrap.variable.less
+bootstrap.reset.less
+package.subpackage.widget.less
+package.widget.less
+style.less                   // This would be our root file
+```
 
 ## Installation via Git
 
@@ -34,9 +43,13 @@ Install deps and link it:
 
 ## Usage
 
-You can either execute `trendspotter` from the root directory of your styles, or from anywhere using this:
+As of now, you should execute `trendspotter` from within the directory of your files:
 
-	trendspotter /path/to/your/style-root/
+```
+$ pwd
+~/Projects/awesome/assets/css
+$ trendspotter [file1.less files2.less ...]
+```
 
 ## Warning
 
