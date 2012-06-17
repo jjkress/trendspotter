@@ -1,7 +1,11 @@
 {
   "name":         "trendspotter",
   "description":  "Watches your less styles for changes",
-  "version":      "0.9.0",
+  "author":       "JJ Kress <jjkress@gmail.com>",
+  "bugs": {
+    "url":        "https://github.com/jjkress/trendspotter/issues"
+  },
+  "version":      "1.0.0",
   "main":         "lib/index.js",
   "preferGlobal": true,
   "dependencies": {
